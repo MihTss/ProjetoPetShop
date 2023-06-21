@@ -1,0 +1,13 @@
+[
+  {
+    "id": 1,
+    "precoTotal": 30.00,
+    "listaProdutos": [
+      {
+        "idProduct": "1",
+        "quantidade": 2
+      }
+    ],
+    "cliente": "1"
+  }
+]

@@ -1,0 +1,20 @@
+[
+  {
+      "id": 1,
+      "nomeCategoria": "Alimentos",
+      "descricao": "Alimentos para cães, gatos e outros animais de estimação, como rações secas, úmidas, alimentos naturais, alimentos especiais para necessidades dietéticas específicas, petiscos saudáveis e guloseimas."
+  },
+  {
+    "id": 2,
+    "nomeCategoria": "Higiene",
+    "descricao": "Produtos para cuidados e higiene dos animais, como shampoos, condicionadores, escovas, pentes, cortadores de unhas, produtos de limpeza para ouvidos, produtos dentários e itens relacionados ao banho e tosa."
+  },
+  {
+    "id": 3,
+    "nomeCategoria": "Brinquedos",
+    "descricao": "Inclui uma variedade de brinquedos interativos, brinquedos de pelúcia, bolas, cordas, jogos de inteligência e outros itens que proporcionam entretenimento e estimulação mental para os animais de estimação."
+  }
+
+]
+
+

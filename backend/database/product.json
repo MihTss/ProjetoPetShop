@@ -1,0 +1,31 @@
+[
+    {
+        "id": 1,
+        "nome": "Urso pelucia",
+        "imagem": "",
+        "descricao": "Urso de pelucia em formato de macaco",
+        "preco": "R$ 15,00",
+        "categoria": "1",
+        "animal": "Cachorro e Gato",
+        "comentarios": [{
+            "texto": "Muito bom",
+            "nota": "10"
+          }]
+    },
+    {
+      "id": 2,
+      "nome": "Ração Golden - Pequeno porte",
+      "imagem": "",
+      "descricao": "Ração da marca Golden para cachorros de pequeno porte",
+      "preco": "R$ 60,00",
+      "categoria": "2",
+      "animal": "Cachorro",
+      "comentarios": [{
+          "texto": "Meu cachorro gosta muito desta ração!",
+          "nota": "10"
+        }]
+  }
+  ]
+  
+  
+  
