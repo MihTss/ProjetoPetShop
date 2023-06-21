@@ -1,32 +1,36 @@
-const categoriaModel = require('../models/categoryModel')
+const categoryModel = require('../models/categoryModel')
 
-class categoriaController {
+class categoryController {
 
-  async cadastrarCategoria(req, res) {
+  // Register Category
+  async saveCategory(req, res) {
     let user = req.body
-    const max = await categoriaModel.findOne({}).sort({ id: -1 })
+    const max = await categoryModel.findOne({}).sort({ id: -1 })
     user.id = max == null ? 1 : max.id + 1
-    const resultado = await categoriaModel.create(user)
-    res.status(201).json(resultado)
+    const result = await categoryModel.create(user)
+    res.status(201).json(result)
   }
 
-  async listarCategoria(req, res) {
-    const resultado = await categoriaModel.find({})
-    res.status(200).json(resultado)
+  // List Category 
+  async listCategory(req, res) {
+    const result = await categoryModel.find({})
+    res.status(200).json(result)
   }
 
-  async buscarPorIdCategoria(req, res) {
+  // Seach Category by Id 
+  async searchCategory(req, res) {
     const id = req.params.id
-    const resultado = await categoriaModel.findOne({ 'id': id })
-    res.status(200).json(resultado)
+    const result = await categoryModel.findOne({ 'id': id })
+    res.status(200).json(result)
   }
 
-  async atualizarCategoria(req, res) {
+  // Update Category 
+  async updateCategory(req, res) {
     const id = req.params.id
-    const _id = String((await categoriaModel.findOne({ 'id': id }))._id)
-    await categoriaModel.findByIdAndUpdate(String(_id), req.body)
+    const _id = String((await categoryModel.findOne({ 'id': id }))._id)
+    await categoryModel.findByIdAndUpdate(String(_id), req.body)
     res.status(200).send()
   }
 }
 
-module.exports = new categoriaController()
+module.exports = new categoryController()

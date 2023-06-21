@@ -1,59 +1,58 @@
-const pedidoModel = require('../models/orderModel');
-const clienteModel = require('../models/clientModel');
+const orderModel = require('../models/orderModel');
+const clientModel = require('../models/clientModel');
 const productModel = require('../models/productModel')
 
-class PedidoController {
+class orderController {
 
-    //CADASTRAR 
-    async cadastrarPedidos(req, res) {
-        const max = await pedidoModel.findOne({}).sort({ codigo: -1 });
-        const pedido = req.body;
-        pedido.codigo = max == null ? 1 : max.codigo + 1;
+    //Register orders 
+    async saveOrder(req, res) {
+        const max = await orderModel.findOne({}).sort({ codigo: -1 });
+        const order = req.body;
+        order.codigo = max == null ? 1 : max.codigo + 1;
 
-
-        for (const product of pedido.listaProdutos) {
-            await productModel
-              .findOne({ id: product.idProduct })
-              .then((produto) => {
-                if (produto) {
-                  product.idProduct = produto._id;
-                }
-              });
-          }
-          
-        const cliente = await clienteModel.findOne({ id: pedido.cliente });
-        if (!cliente) {
+        // searching for products in productModel, and replacing the "idProduct" with ObjectId inside DB
+          for (const product of order.listaProdutos) {
+              await productModel
+                .findOne({ id: product.idProduct })
+                .then((produto) => {
+                  if (produto) {
+                    product.idProduct = produto._id;
+                  }
+                });
+            }
+        // searching for clients in clientModel, and replacing the "cliente" with ObjectId inside DB
+        const client = await clientModel.findOne({ id: order.cliente });
+        if (!client) {
         return res.status(404).json({ error: 'cliente não encontrado' });
         }
-        // Utilize o ObjectId encontrado
-        pedido.cliente = cliente._id; 
+        // replacing with objectId found
+        order.cliente = client._id; 
 
-        
-        const resultado = await pedidoModel.create(pedido);
-        res.status(201).json(resultado);
+        const result = await orderModel.create(order);
+        res.status(201).json(result);
     }
 
-    //LISTAR
-    async listarPedidos(req, res) {
-        const resultado = await pedidoModel.find({})
-        res.status(200).json(resultado)
+    // List Orders
+    async listOrders (req, res) {
+        const result = await orderModel.find({})
+        res.status(200).json(result)
       }
 
-    //BUSCAR POR NOME DO CLIENTE 
-    async buscarPedidoPorNome(req, res) {
-        const cliente = req.params.nome
-        const resultado = await clienteModel.findOne({ 'cliente': cliente })
-        res.status(200).json(resultado)
+    // Seach order by Client Id 
+    async searchOrder(req, res) {
+        const client = req.params.nome
+        const result = await clientModel.findOne({ 'cliente': client })
+        res.status(200).json(result)
     }
 
-    //ATUALIZAR PEDIDOS 
-    async atualizarPedidos(req, res) {
+    // Update orders 
+    async updateOrder(req, res) {
         const id = req.params.id
-        const _id = String((await clienteModel.findOne({ 'id': id }))._id)
+        const _id = String((await clientModel.findOne({ 'id': id }))._id)
         await clientModel.findByIdAndUpdate(String(_id), req.body)
         res.status(200).send()
       }
 }
 
-module.exports = new PedidoController();
+module.exports = new orderController();
 
