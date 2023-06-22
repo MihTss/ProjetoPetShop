@@ -2,9 +2,11 @@ require('./mongodb')
 const usersModels = require('../models/clientModel')
 const clientes = require('./client.json')
 
-async function carregarDados() {
+async function loadData() {
   try {
+    // Performs a bulk delete operation on a database collection named "usersModels"
     await usersModels.deleteMany({})
+   //loads the json called "category.js"
     for (const user of clientes) {
       await usersModels.create(user)
     }
@@ -15,4 +17,4 @@ async function carregarDados() {
     process.exit()
   }
 }
-carregarDados()
+loadData()

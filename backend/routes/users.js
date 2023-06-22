@@ -1,19 +1,19 @@
 const express             = require('express')
 const router              = express.Router()
 const clientController    = require('../controllers/clientController')
-const categoriaController = require('../controllers/categoryController')
+const categoryController  = require('../controllers/categoryController')
 const productController   = require('../controllers/productController')
-const pedidosController   = require('../controllers/orderController')
+const orderController     = require('../controllers/orderController')
 const loginController     = require('../controllers/loginController');
 const auth                = require ('../auth/auth')
 
 
-// Endpoints clientes
-router.get('/listarClientes'         , clientController.listarCliente)
-router.get('/idCliente/:id'         , clientController.buscarPorIdCliente)
-router.post('/cadastrarCliente'     , clientController.cadastrarCliente)
-router.put('/atualizarCliente/:id'  , clientController.atualizarCliente)
-router.delete('/excluirCliente/:id' , clientController.excluirCliente)
+// Clientes endpoints 
+router.post('/cadastrarCliente'               , clientController.saveClient)
+router.get('/listarClientes'                  , clientController.listClient)
+router.get('/idCliente/:id'                   , clientController.searchClient)
+router.put('/atualizarCliente/:id'            , clientController.updateClient)
+router.delete('/excluirCliente/:id'           , clientController.deleteClient)
 
 //Endpoints Categoria
 router.get('/listarCategorias'       , categoriaController.listarCategoria)
@@ -27,14 +27,13 @@ router.get('/listarProdutos'         , productController.listarProduto)
 router.get('/idProduto/:_id'         , productController.buscarPorIdProduto)
 router.put('/atualizarProduto/:_id'  , productController.atualizarProduto)
 
-//Endopoints Pedidos
-router.post('/cadastrarPedido',auth.autorizar, pedidosController.cadastrarPedidos)
-router.put('/atualizarPedido/:id'           , pedidosController.atualizarPedidos)
-router.get('/buscarPedidoPorNome/:cliente'   , pedidosController.buscarPedidoPorNome)
-router.get('/listarPedidos'                  , pedidosController.listarPedidos)
-
-
-//Endpoints Login
-router.post('/login', loginController.login);
+// Orders endopoints 
+router.post('/cadastrarPedido',auth.autorizar , orderController.saveOrder)
+router.get('/listarPedidos'                   , orderController.listOrders)
+router.get('/buscarPedidoPorNome/:cliente'    , orderController.searchOrder)
+router.put('/atualizarPedido/:id'             , orderController.updateOrder)
+ 
+// Login endpoints 
+router.post('/login'                          , loginController.login);
 
 module.exports = router
