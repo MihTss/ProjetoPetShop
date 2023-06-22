@@ -11,7 +11,7 @@ const auth                = require ('../auth/auth')
 // Clientes endpoints 
 router.post('/cadastrarCliente'               , clientController.saveClient)
 router.get('/listarClientes'                  , clientController.listClient)
-router.get('/idCliente/:id'                   , clientController.searchClient)
+router.get('/idCliente/:id'                   , clientController.findClientById)
 router.put('/atualizarCliente/:id'            , clientController.updateClient)
 router.delete('/excluirCliente/:id'           , clientController.deleteClient)
 
@@ -30,7 +30,7 @@ router.put('/atualizarProduto/:_id'  , productController.updateProduct)
 // Orders endopoints 
 router.post('/cadastrarPedido',auth.autorizar , orderController.saveOrder)
 router.get('/listarPedidos'                   , orderController.listOrders)
-router.get('/buscarPedidoPorNome/:cliente'    , orderController.searchOrder)
+router.get('/buscarPedidoPorNome/:cliente'    , orderController.findOrderByName)
 router.put('/atualizarPedido/:id'             , orderController.updateOrder)
  
 // Login endpoints 

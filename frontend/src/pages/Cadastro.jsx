@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import Titulo from '../components/Titulo';
 import mc from '../assets/mc.svg';
 import '../css/card.css';
@@ -98,7 +97,6 @@ const Cadastro = () => {
             reader.readAsDataURL(file);
         }
     };
-    console.log(base64Image)
 
     const handleDataChange = (event) => {
         const { name, value } = event.target;
@@ -140,7 +138,6 @@ const Cadastro = () => {
             senha: userData.senha,
         };
 
-        console.log(formData);
 
         api
             .post('/cadastrarCliente', formData)

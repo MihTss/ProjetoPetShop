@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import ProductCard from './../ProductCard/index';
-import produtos from "../../test/produtos.json"
 import api from '../../services/api';
 
 const Produtos = ({ nomeCategoria, filter, findTitle, idCategoria }) => {

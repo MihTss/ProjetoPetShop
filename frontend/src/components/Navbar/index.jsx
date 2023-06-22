@@ -7,7 +7,6 @@ const Navbar = () => {
   const location = useLocation();
   const userLogged = JSON.parse(sessionStorage.getItem('userLogged'))
 
-  console.log(userLogged)
 
   return (
     <div className='flex justify-between items-center h-20 px-5' style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>

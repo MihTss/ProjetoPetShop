@@ -23,7 +23,6 @@ const Carrinho = () => {
     });
     setCartItems(updatedItems);
     localStorage.setItem('cartItems', JSON.stringify(updatedItems));
-    console.log(localStorage.getItem('cartItems'))
   };
 
   return (

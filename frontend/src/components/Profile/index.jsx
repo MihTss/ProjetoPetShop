@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const userLogged = JSON.parse(sessionStorage.getItem('userLogged'))
   const [dropMenu, setDropMenu] = useState(false)
+  const navigate = useNavigate()
 
   const dropMenuHandle = () => {
     setDropMenu(!dropMenu)
@@ -10,7 +12,7 @@ const Profile = () => {
 
   const logoutHandle = () => {
     sessionStorage.setItem('userLogged', null)
-    window.location.reload()
+    navigate('/')
   }
 
   return (

@@ -18,6 +18,10 @@ const Home = () => {
     setFilter(value)
   }
 
+  const listaCategoriasOrdenadas = listaCategorias.sort((a, b) => {
+    return a.nomeCategoria.localeCompare(b.nomeCategoria)
+  })
+
   useEffect(() => {
     api
       .get('/listarCategorias')
@@ -32,7 +36,7 @@ const Home = () => {
         <Filters onTitleChange={handleTitleChange} onFilterChange={handleFilterChange} />
       </div>
       {
-        listaCategorias.map((categ, key) => (
+        listaCategoriasOrdenadas.map((categ, key) => (
           <Produtos key={key} filter={filter} findTitle={title} nomeCategoria={categ.nomeCategoria} idCategoria={categ._id} />
         ))
       }

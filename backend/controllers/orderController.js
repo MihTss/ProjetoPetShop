@@ -39,7 +39,7 @@ class orderController {
       }
 
     // Seach order by Client Id 
-    async searchOrder(req, res) {
+    async findOrderByName(req, res) {
         const client = req.params.nome
         const result = await clientModel.findOne({ 'cliente': client })
         res.status(200).json(result)

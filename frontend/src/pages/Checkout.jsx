@@ -11,7 +11,6 @@ const Checkout = () => {
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0.00)
 
-    console.log(cartItems)
 
     const userLogged = JSON.parse(sessionStorage.getItem('userLogged'))
 
@@ -29,7 +28,6 @@ const Checkout = () => {
     useEffect(() => {
         const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
         setCartItems(storedCartItems);
-        console.log(storedCartItems)
     }, []);
 
     useEffect(() => {
@@ -49,7 +47,6 @@ const Checkout = () => {
             return alert('Seu carrinho está vazio!')
         }
 
-        console.log(orderData)
 
         // api
         //     .post('/cadastrarPedido', orderData)

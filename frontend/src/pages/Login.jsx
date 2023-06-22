@@ -20,7 +20,6 @@ const Login = () => {
             .then((response) => {
                 var objetoString = JSON.stringify(response.data)
                 sessionStorage.setItem("userLogged", objetoString);
-                console.log(sessionStorage.getItem("userLogged"))
                 navigate("/");
             })
             .catch((err) => {

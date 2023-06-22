@@ -3,7 +3,6 @@ import Titulo from './../components/Titulo/index';
 
 import { Link, useParams } from 'react-router-dom';
 
-import produtos from "../test/produtos.json"
 import Comentarios from '../components/Comentarios';
 import star from '../assets/star.svg'
 import api from '../services/api';
@@ -24,13 +23,11 @@ const Detalhes = () => {
     }, [])
 
     useEffect(() => {
-        console.log(produtoEscolhido.categoria)
         if(produtoEscolhido.categoria){
             api
               .get(`/idCategoria/${produtoEscolhido.categoria}`)
               .then((response) => {
                 setNomeCategoria(response.data.nomeCategoria)
-                console.log(response.data.nomeCategoria)
             })
         }
     }, [produtoEscolhido])
@@ -87,7 +84,7 @@ const Detalhes = () => {
                     <div>
                         <div className='flex items-center justify-between'>
                             <h3 className='text-2xl font-semibold'>{produtoEscolhido.nome}</h3>
-                            <p className='flex items-center'>{5} <img src={star} alt="" className='h-5 ml-1' /></p>
+                            <p className='flex items-center'>{mediaNotas} <img src={star} alt="" className='h-5 ml-1' /></p>
                         </div>
                         <p className='font-semibold text-yellow-500'>{nomeCategoria}</p>
                         <p className='my-5'>{produtoEscolhido.descricao}</p>

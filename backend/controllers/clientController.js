@@ -8,7 +8,7 @@ class clientController {
     const max = await clientModel.findOne({}).sort({ id: -1 })
     client.id = max == null ? 1 : max.id + 1
 
-    if (await clientModel.findOne({ 'email': cliente.email })) {
+    if (await clientModel.findOne({ 'email': client.email })) {
       return res.status(400).send({ error: 'Cliente já cadastrado!' });
   }
 
@@ -23,7 +23,7 @@ class clientController {
   }
 
     //Seach Client by Id 
-  async searchClient(req, res) {
+  async findClientById(req, res) {
     const id = req.params.id;
     const result = await clientModel.findOne({ 'id': id });
     res.status(200).json(result);
