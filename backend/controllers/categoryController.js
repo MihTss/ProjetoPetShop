@@ -16,8 +16,8 @@ class categoriaController {
   }
 
   async buscarPorIdCategoria(req, res) {
-    const id = req.params.id
-    const resultado = await categoriaModel.findOne({ 'id': id })
+    const _id = req.params._id
+    const resultado = await categoriaModel.findOne({ '_id': _id })
     res.status(200).json(resultado)
   }
 

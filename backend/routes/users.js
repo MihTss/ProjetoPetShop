@@ -17,15 +17,15 @@ router.delete('/excluirCliente/:id' , clientController.excluirCliente)
 
 //Endpoints Categoria
 router.get('/listarCategorias'       , categoriaController.listarCategoria)
-router.get('/idCategoria/:id'       , categoriaController.buscarPorIdCategoria)
+router.get('/idCategoria/:_id'       , categoriaController.buscarPorIdCategoria)
 router.post('/cadastrarCategoria'   , categoriaController.cadastrarCategoria)
 router.put('/atualizarCategoria/:id', categoriaController.atualizarCategoria)
 
 //Endopoints Produto
 router.post('/cadastrarProduto'     , productController.cadastrarProduto)
 router.get('/listarProdutos'         , productController.listarProduto)
-router.get('/idProduto/:id'         , productController.buscarPorIdProduto)
-router.put('/atualizarProduto/:id'  , productController.atualizarProduto)
+router.get('/idProduto/:_id'         , productController.buscarPorIdProduto)
+router.put('/atualizarProduto/:_id'  , productController.atualizarProduto)
 
 //Endopoints Pedidos
 router.post('/cadastrarPedido',auth.autorizar, pedidosController.cadastrarPedidos)
@@ -36,8 +36,5 @@ router.get('/listarPedidos'                  , pedidosController.listarPedidos)
 
 //Endpoints Login
 router.post('/login', loginController.login);
-
-
-
 
 module.exports = router

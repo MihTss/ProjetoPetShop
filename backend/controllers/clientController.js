@@ -8,7 +8,7 @@ class clientController {
     cliente.id = max == null ? 1 : max.id + 1
 
     if (await clientModel.findOne({ 'email': cliente.email })) {
-      res.status(400).send({ error: 'Cliente já cadastrado!' });
+      return res.status(400).send({ error: 'Cliente já cadastrado!' });
   }
 
     const resultado = await clientModel.create(cliente)

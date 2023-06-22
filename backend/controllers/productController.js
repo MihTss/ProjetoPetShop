@@ -30,8 +30,8 @@ class clientController {
   }
 
   async buscarPorIdProduto(req, res) {
-    const id = req.params.id
-    const resultado = await productModel.findOne({ 'id': id })
+    const _id = req.params._id
+    const resultado = await productModel.findOne({ '_id': _id })
     res.status(200).json(resultado)
   }
 
