@@ -29,7 +29,7 @@ class productController {
     res.status(200).json(result)
   }
 
-  async buscarPorIdProduto(req, res) {
+  async findProductById(req, res) {
     const _id = req.params._id
     const resultado = await productModel.findOne({ '_id': _id })
     res.status(200).json(resultado)

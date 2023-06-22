@@ -16,16 +16,16 @@ router.put('/atualizarCliente/:id'            , clientController.updateClient)
 router.delete('/excluirCliente/:id'           , clientController.deleteClient)
 
 //Endpoints Categoria
-router.get('/listarCategorias'       , categoriaController.listarCategoria)
-router.get('/idCategoria/:_id'       , categoriaController.buscarPorIdCategoria)
-router.post('/cadastrarCategoria'   , categoriaController.cadastrarCategoria)
-router.put('/atualizarCategoria/:id', categoriaController.atualizarCategoria)
+router.get('/listarCategorias'       , categoryController.listCategory)
+router.get('/idCategoria/:_id'       , categoryController.findCategoryById)
+router.post('/cadastrarCategoria'   , categoryController.saveCategory)
+router.put('/atualizarCategoria/:id', categoryController.updateCategory)
 
 //Endopoints Produto
-router.post('/cadastrarProduto'     , productController.cadastrarProduto)
-router.get('/listarProdutos'         , productController.listarProduto)
-router.get('/idProduto/:_id'         , productController.buscarPorIdProduto)
-router.put('/atualizarProduto/:_id'  , productController.atualizarProduto)
+router.post('/cadastrarProduto'     , productController.saveProducts)
+router.get('/listarProdutos'         , productController.listProduct)
+router.get('/idProduto/:_id'         , productController.findProductById)
+router.put('/atualizarProduto/:_id'  , productController.updateProduct)
 
 // Orders endopoints 
 router.post('/cadastrarPedido',auth.autorizar , orderController.saveOrder)
