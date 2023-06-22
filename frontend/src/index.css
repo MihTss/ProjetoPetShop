@@ -1,0 +1,68 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+        sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    overflow-x: hidden;
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+input{
+    outline: none;
+}
+
+.shadow {
+    filter: drop-shadow(4px -4px 8px #FFFFFF) drop-shadow(-4px 4px 8px #A9A9A8)
+}
+
+.hover-input{
+    background-color: white;
+    border-radius: 0.5rem;
+    filter: drop-shadow(0px 0px 1px #FFFFFF) drop-shadow(0px 0px 1px #A9A9A8);   
+    transition: .2s
+}
+
+.hover-input:hover, .hover-input:focus, .hover-input:valid{
+    filter: drop-shadow(4px -4px 8px #FFFFFF) drop-shadow(-4px 4px 8px #A9A9A8);   
+}
+
+.hover-button{
+    border-radius: 0.5rem;
+    filter: none;
+    transition: .2s
+}
+
+.hover-button:hover{
+    filter: drop-shadow(4px -4px 8px #FFFFFF) drop-shadow(-4px 4px 8px #A9A9A8);   
+}
+
+.hover-select{
+    background-color: white;
+    border-radius: 0.5rem;
+    filter: drop-shadow(0px 0px 1px #FFFFFF) drop-shadow(0px 0px 1px #A9A9A8);   
+    transition: .2s
+}
+
+.hover-select:hover, .hover-select:focus{
+    filter: drop-shadow(4px -4px 8px #FFFFFF) drop-shadow(-4px 4px 8px #A9A9A8);   
+}
+
+.hover-drop > *{
+    background-color: white;
+    transition: .2s;
+}
+
+.hover-drop:hover > *{
+    background-color: rgb(220 68 68);
+}

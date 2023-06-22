@@ -1,0 +1,92 @@
+.card__bank {
+    width: 20rem;
+    height: 12rem;
+    background-color: rgba(250, 204, 21, 1);
+    border-radius: 1.4rem;
+    box-shadow: 0 0 1rem rgba(0, 0, 0, .2);
+    border: 1px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(30px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: relative;
+    z-index: 1;
+
+    overflow: hidden;
+}
+
+.card__bank-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.card__bank-name {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+}
+
+.card__img {
+    width: 3.6rem;
+    height: 1.4rem;
+}
+
+.card__number {
+    width: 80%;
+    margin: auto;
+    font-size: 1.4rem;
+    font-weight: 500;
+
+    position: relative;
+    top: .7rem;
+}
+
+.card__number input::placeholder{
+    color: rgb(100, 100, 100);
+}
+
+.card__details {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: .7rem 1.4rem;
+}
+
+.card__name {
+    font-size: 1rem;
+}
+
+.card__name::placeholder {
+    color: rgb(100, 100, 100);
+}
+
+.card__code {
+    display: flex;
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    font-size: .6rem;
+}
+
+.card__code span {
+    width: 50%;
+}
+
+.card__cvc {
+    font-size: .85rem;
+    width: 50%;
+
+}
+
+.card__cvc::placeholder{
+    color: rgb(100, 100, 100);
+}
+
+input {
+    background-color: transparent;
+
+}
