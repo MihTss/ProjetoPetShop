@@ -16,7 +16,6 @@ const Profile = () => {
   const logoutHandle = () => {
     sessionStorage.setItem('userLogged', null)
     navigate('/')
-    // window.location.reload()
   }
 
   // Retorno do componente Profile
