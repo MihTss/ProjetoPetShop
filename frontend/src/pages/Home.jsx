@@ -9,6 +9,8 @@ const Home = () => {
   const [filter, setFilter] = useState('nome')
   const [listaCategorias, setListaCategorias] = useState([])
 
+
+  
   const handleTitleChange = (value) => {
     setTitle(value)
   }
