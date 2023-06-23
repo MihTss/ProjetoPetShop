@@ -16,6 +16,7 @@ const Profile = () => {
   const logoutHandle = () => {
     sessionStorage.setItem('userLogged', null)
     navigate('/')
+    // window.location.reload()
   }
 
   // Retorno do componente Profile
@@ -23,7 +24,7 @@ const Profile = () => {
   return (
     <div className='relative'>
       <button type='button' onClick={dropMenuHandle} className='overflow-hidden w-10 h-10 flex items-center rounded-full hover-profile'>
-        <img src={userLogged.imagem} className='' />
+        <img src={userLogged ? userLogged.imagem : ""} className='' />
       </button>
       <button type='button' onClick={logoutHandle} className={`absolute right-0 flex flex-col items-end shadow mt-2 hover-drop ${dropMenu ? "flex" : "hidden"}`}>
         <div className='bg-white h-2 w-3 relative mr-3' style={{ clipPath: 'polygon(50% 0, 0 100%, 100% 100%)' }}></div>
