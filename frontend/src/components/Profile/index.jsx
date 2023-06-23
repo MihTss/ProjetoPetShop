@@ -12,7 +12,7 @@ const Profile = () => {
     setDropMenu(!dropMenu)
   }
 
-  //Função responsável por fazer o logout do usuário
+  //Função responsável por fazer o logout do usuário e voltar à pagina inicial
   const logoutHandle = () => {
     sessionStorage.setItem('userLogged', null)
     navigate('/')
