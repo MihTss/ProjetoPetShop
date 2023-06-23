@@ -4,7 +4,7 @@ const bcryptjs = require('bcryptjs');
 
 async function incluirToken(cliente) {
   const token = await jwt.sign({ 'id': cliente.id }, auth.appId, {
-    expiresIn: 3600 // Expira em 3600 segundos ou 1 hora.
+    expiresIn: 3 // Expira em 3600 segundos ou 1 hora.
   });
   cliente.token = token;
   cliente.senha = undefined;

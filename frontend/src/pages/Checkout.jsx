@@ -6,14 +6,15 @@ import '../css/io-button.css'
 import mc from '../assets/mc.svg';
 import '../css/card.css'
 import api from '../services/api';
+import headerToken from './../services/headerConstructor';
+import { useNavigate } from 'react-router-dom';
+
 
 const Checkout = () => {
     const [cartItems, setCartItems] = useState([]);
     const [total, setTotal] = useState(0.00)
-
-
+    const navigate = useNavigate()
     const userLogged = JSON.parse(sessionStorage.getItem('userLogged'))
-
     const [orderData, setOrderData] = useState({
         cliente: userLogged.id,
         precoTotal: '',
@@ -28,6 +29,16 @@ const Checkout = () => {
     useEffect(() => {
         const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
         setCartItems(storedCartItems);
+
+        const updatedListaProdutos = storedCartItems.map(item => ({
+            idProduct: item.id,
+            quantidade: item.quantidade,
+          }));
+        
+          setOrderData(prevOrderData => ({
+            ...prevOrderData,
+            listaProdutos: updatedListaProdutos,
+          }));
     }, []);
 
     useEffect(() => {
@@ -36,27 +47,38 @@ const Checkout = () => {
             cartItems.forEach((item) => {
                 totalPrice += (item.preco * item.quantidade);
             });
+
+            totalPrice = Number(totalPrice.toFixed(2));
+
             setTotal(totalPrice);
+            setOrderData(prevOrderData => ({
+                ...prevOrderData,
+                precoTotal: totalPrice,
+            }))
         };
 
         calculateTotal();
     }, [cartItems]);
 
     const handleSubmit = () => {
-        if(total === 0){
+        if(orderData.listaProdutos.length == 0){
             return alert('Seu carrinho está vazio!')
         }
 
+        const headers = headerToken()
 
-        // api
-        //     .post('/cadastrarPedido', orderData)
-        //     .then((response) => {
-        //         alert('Compra efetuada!')
-        //     })
-        //     .catch((error) => {
-        //         console.error(error.response.data)
-        //         alert("Ocorreu um erro! " + error.response.data.error)
-        //     })
+        api
+            .post('/cadastrarPedido', orderData, { headers })
+            .then((response) => {
+                alert('Compra efetuada!')
+                setOrderData([])
+                localStorage.removeItem("cartItems")
+                navigate('/')
+            })
+            .catch((error) => {
+                console.error(error.response.data)
+                alert("Ocorreu um erro! " + error.response.data.error)
+            })
     }
 
     return (
@@ -74,7 +96,7 @@ const Checkout = () => {
                             <p>{userLogged.endereco}</p>
                         </div>
                         <h3 className='font-semibold text-lg'>Cartão de compra:</h3>
-                        <div className="card__bank mb-4">
+                        <div className="card__bank my-5 shadow">
                             <div className="card__bank-info">
                                 <span className="card__bank-name">Cartão</span>
                                 <img className="card__img" src={mc} alt="" />

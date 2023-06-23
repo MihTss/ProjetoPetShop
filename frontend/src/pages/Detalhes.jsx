@@ -84,7 +84,7 @@ const Detalhes = () => {
                     <div>
                         <div className='flex items-center justify-between'>
                             <h3 className='text-2xl font-semibold'>{produtoEscolhido.nome}</h3>
-                            <p className='flex items-center'>{mediaNotas} <img src={star} alt="" className='h-5 ml-1' /></p>
+                            <p className='flex items-center'>{mediaNotas.toFixed(1)} <img src={star} alt="" className='h-5 ml-1' /></p>
                         </div>
                         <p className='font-semibold text-yellow-500'>{nomeCategoria}</p>
                         <p className='my-5'>{produtoEscolhido.descricao}</p>

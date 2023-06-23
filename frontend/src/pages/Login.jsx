@@ -33,7 +33,6 @@ const Login = () => {
     }
 
 
-
     return (
         <div className='mb-10'>
             <Titulo texto={"Login de Usuário"} />

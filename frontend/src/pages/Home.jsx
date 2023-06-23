@@ -7,7 +7,6 @@ import api from '../services/api';
 const Home = () => {
   const [title, setTitle] = useState('')
   const [filter, setFilter] = useState('nome')
-
   const [listaCategorias, setListaCategorias] = useState([])
 
   const handleTitleChange = (value) => {
@@ -29,6 +28,7 @@ const Home = () => {
         setListaCategorias(response.data)
       })
   }, [])
+
   return (
     <section className=''>
       <Titulo texto={"Home"} />
