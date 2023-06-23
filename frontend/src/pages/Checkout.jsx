@@ -95,6 +95,7 @@ const Checkout = () => {
             .catch((error) => {
                 console.error(error.response.data)
                 alert("Ocorreu um erro! " + error.response.data.error)
+                navigate('/login')
             })
     }
 

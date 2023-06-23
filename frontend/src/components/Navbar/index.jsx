@@ -1,13 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../../assets/logo-petshop.png';
 import Profile from '../Profile';
+import jwt from 'jwt-decode'
 
 const Navbar = () => {
   // Declaração dos estados utilizados nesse componente 
-
   const location = useLocation();
-  const userLogged = JSON.parse(sessionStorage.getItem('userLogged'))
+  const [userLogged, setUserLogged] = useState(JSON.parse(sessionStorage.getItem('userLogged')))
+
+  //Função responsável por verificar se o token do usuário está valido a cada troca de página, caso ela não esteja, exclui as informações do usuário da sessionStorage afim de "deslogar" ele, como uma validação da sessão do usuário
+  useEffect(() => {
+    const token = userLogged ? userLogged.token : null
+    if (token) {
+      //Decodifica as informações do token
+      const dataToken = jwt(token)
+      //Pega o horário de expiração do token
+      const expirationTime = dataToken.exp
+      //Compara a hora de expiração com a hora atual e, caso esteja expirada, remove as informações do usuário da sessionStorage
+      if (expirationTime < Date.now() / 1000) {
+        sessionStorage.setItem('userLogged', null)
+        window.location.reload()
+      }
+    }
+    setUserLogged(JSON.parse(sessionStorage.getItem('userLogged')))
+  }, [location])
 
   //Return do componente navbar
   //A ideia aqui é fazer a navegação entre páginas, mas antes é feita a validações referentes à qual página o usuário se encontra e se está logado ou não
