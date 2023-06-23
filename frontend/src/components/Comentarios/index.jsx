@@ -2,6 +2,7 @@ import React from 'react'
 import Comentario from '../Comentario'
 
 const Comentarios = ({objeto}) => {  
+  //Retorno do componente onde ficam os comentários de um produto
   return (
     <section className='m-auto w-1/2 mb-5'>
       <h3 className='text-lg font-semibold mb-4'>Comentários do produto:</h3>

@@ -36,4 +36,5 @@ router.put('/atualizarPedido/:id'             , orderController.updateOrder)
 // Login endpoints 
 router.post('/login'                          , loginController.login);
 
+//Exportação da função
 module.exports = router

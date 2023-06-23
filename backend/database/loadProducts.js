@@ -4,10 +4,10 @@ const products = require('../database/product.json')
 const category = require('../models/categoryModel')
 
 async function loadData() {
-      // Performs a bulk delete operation on a database collection named "usersModels"
+      // Performs a bulk delete operation on a database collection named "producModel"
       await producModel.deleteMany({});
 
-      // This loop searches within the "category" database for the same categoryId sent by the user, and if it finds it, it will replace product.categoria with the objectId within the database 
+      // Este loop procura no banco de dados "category" o mesmo categoryId enviado pelo usuário e, se o encontrar, substituirá product.categoria pelo objectId no banco de dados
       for (const product of products) {
           await category
               .findOne({ id: product.categoria })
@@ -15,6 +15,7 @@ async function loadData() {
                 product.categoria = categoria._id;
                   return product;
               })
+              // carrega no banco de dados o json chamado "product.js"
               .then(async (ProdutoAlterado) => {
                   await producModel.create(ProdutoAlterado);
               });

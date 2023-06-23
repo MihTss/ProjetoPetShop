@@ -1,14 +1,15 @@
 require('./mongodb')
-const usersModels = require('../models/clientModel')
+const clientModel = require('../models/clientModel')
 const clientes = require('./client.json')
 
 async function loadData() {
   try {
-    // Performs a bulk delete operation on a database collection named "usersModels"
-    await usersModels.deleteMany({})
-   //loads the json called "category.js"
+    // Executa uma operação de exclusão em massa em uma coleção de banco de dados chamada "clientModel"
+    await clientModel.deleteMany({})
+
+   // carrega no banco de dados o json chamado "client.js"
     for (const user of clientes) {
-      await usersModels.create(user)
+      await clientModel.create(user)
     }
     console.log('Carga de clientes feita!')
   } catch (err) {

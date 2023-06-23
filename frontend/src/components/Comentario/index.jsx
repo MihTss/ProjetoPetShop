@@ -2,6 +2,7 @@ import React from 'react'
 import star from '../../assets/star.svg'
 
 const Comentario = ({ conteudo }) => {
+    //Retorno do componente comentário do produto através das informações recebidas
     return (
         <div className='bg-white hover-input px-4 py-2 mb-2'>
             <h4 className='font-semibold'>{conteudo.usuario}</h4>

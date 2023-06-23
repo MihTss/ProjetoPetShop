@@ -4,10 +4,13 @@ import logo from '../../assets/logo-petshop.png';
 import Profile from '../Profile';
 
 const Navbar = () => {
+  // Declaração dos estados utilizados nesse componente 
+
   const location = useLocation();
   const userLogged = JSON.parse(sessionStorage.getItem('userLogged'))
 
-
+  //Return do componente navbar
+  //A ideia aqui é fazer a navegação entre páginas, mas antes é feita a validações referentes à qual página o usuário se encontra e se está logado ou não
   return (
     <div className='flex justify-between items-center h-20 px-5' style={{ boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)" }}>
       <Link to="/">
@@ -24,13 +27,13 @@ const Navbar = () => {
           <Link to="/checkout" className='m-2 hover-button bg-white rounded-lg px-2 py-1'>Carrinho</Link>
         )}
         {
-         location.pathname !== '/checkout' && !userLogged && (
-          <Link to="/login" className='m-2 hover-button bg-white rounded-lg px-2 py-1'>Carrinho</Link>
-        ) 
+          location.pathname !== '/checkout' && !userLogged && (
+            <Link to="/login" className='m-2 hover-button bg-white rounded-lg px-2 py-1'>Carrinho</Link>
+          )
         }
         {userLogged && (
-          <Profile/>
-        )         
+          <Profile />
+        )
         }
       </div>
     </div>

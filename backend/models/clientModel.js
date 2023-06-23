@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const bcryptjs = require('bcryptjs');
 
+// Criando um novo schema fornecido pelo mongoose, definindo a estrutura de dados que serão enviados ao banco de dados 
 const userSchema = new mongoose.Schema({
   id: {
     type: Number,

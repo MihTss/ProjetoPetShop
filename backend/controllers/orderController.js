@@ -4,13 +4,13 @@ const productModel = require('../models/productModel')
 
 class orderController {
 
-    //Register orders 
+    // Registrar pedido dentro do banco de dados através da API
     async saveOrder(req, res) {
         const max = await orderModel.findOne({}).sort({ codigo: -1 });
         const order = req.body;
         order.codigo = max == null ? 1 : max.codigo + 1;
 
-        // searching for products in productModel, and replacing the "idProduct" with ObjectId inside DB
+        // Procurando produtos em productModel e substituindo o "idProduct" por ObjectId dentro do banco de dados
           for (const product of order.listaProdutos) {
               await productModel
                 .findOne({ id: product.idProduct })
@@ -20,32 +20,32 @@ class orderController {
                   }
                 });
             }
-        // searching for clients in clientModel, and replacing the "cliente" with ObjectId inside DB
+
+        // Procurando cliente com base no IdCliente enviado via endpoint, em clientModel e substituindo o "cliente" por ObjectId dentro do banco de dados
         const client = await clientModel.findOne({ id: order.cliente });
         if (!client) {
         return res.status(404).json({ error: 'cliente não encontrado' });
         }
-        // replacing with objectId found
         order.cliente = client._id; 
 
         const result = await orderModel.create(order);
         res.status(201).json(result);
     }
 
-    // List Orders
+    // Listar os pedidos buscando no banco de dados através da API
     async listOrders (req, res) {
         const result = await orderModel.find({})
         res.status(200).json(result)
       }
 
-    // Seach order by Client Id 
+    // Buscar o pedido por ID dentro do banco de dados através da API
     async findOrderByName(req, res) {
         const client = req.params.nome
         const result = await clientModel.findOne({ 'cliente': client })
         res.status(200).json(result)
     }
 
-    // Update orders 
+    // Atualizar o pedido encontrada no banco de dados, por ID, através da API
     async updateOrder(req, res) {
         const id = req.params.id
         const _id = String((await clientModel.findOne({ 'id': id }))._id)
@@ -54,5 +54,6 @@ class orderController {
       }
 }
 
+//Exportação da função
 module.exports = new orderController();
 

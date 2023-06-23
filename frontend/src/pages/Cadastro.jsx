@@ -5,12 +5,13 @@ import '../css/card.css';
 import api from './../services/api';
 import { useNavigate } from 'react-router-dom';
 
-
 const Cadastro = () => {
+    //Declaração dos estados utilizados nesse componente 
     const [imagePreview, setImagePreview] = useState('');
-    const [base64Image, setBase64Image] = useState('');
     const navigate = useNavigate()
+    const [numeroCartaoFormatado, setNumeroCartaoFormatado] = useState('');
 
+    //Declaração do estado em forma de objeto que armazena as informações do usuário digitadas no formulário
     const [userData, setUserData] = useState({
         nomeCompleto: '',
         telefone: '',
@@ -25,8 +26,8 @@ const Cadastro = () => {
         email: '',
         senha: '',
     });
-    const [numeroCartaoFormatado, setNumeroCartaoFormatado] = useState('');
 
+    //Função responsável por formatar o número do cartão e exibir no front, adicionando dois espaços a cara quatro dígitos informados pelo usuário
     function formatarNumeroCartao(event) {
         let numeroDigitado = event.target.value;
         numeroDigitado = numeroDigitado.replace(/\D/g, '');
@@ -40,7 +41,7 @@ const Cadastro = () => {
         }
 
         setNumeroCartaoFormatado(numeroFormatado);
-
+        //Armazena os dados do cartão de crédito sem a formatação, ou seja, o número sem espaços
         setUserData((prevData) => ({
             ...prevData,
             cartaoCredito: {
@@ -50,6 +51,7 @@ const Cadastro = () => {
         }));
     }
 
+    //Função responsável por manipular a imagem selecionada pelo usuário (Redimensiona a imagem para que a maior dimensão fique em 150px ocupando menos espaço no BD, salva a imagem e a exibe como preview na tela de cadastro)
     const handleFileChange = (event) => {
         const file = event.target.files[0];
 
@@ -59,10 +61,11 @@ const Cadastro = () => {
             reader.onloadend = () => {
                 const img = new Image();
 
+                //Lógica de redimensionamento da imagem selecionada
                 img.onload = () => {
                     const canvas = document.createElement('canvas');
-                    const MAX_WIDTH = 240;
-                    const MAX_HEIGHT = 240;
+                    const MAX_WIDTH = 150;
+                    const MAX_HEIGHT = 150;
 
                     let width = img.width;
                     let height = img.height;
@@ -87,20 +90,25 @@ const Cadastro = () => {
 
                     const dataUrl = canvas.toDataURL('image/jpeg');
 
+                    //Seta o preview da imagem para aparecer no front
                     setImagePreview(dataUrl);
-                    setBase64Image(dataUrl);
+                    //Armazena a imagem no objeto que contém as informações do usuário
+                    setUserData((prevData) => ({
+                        ...prevData,
+                        imagem: dataUrl,
+                    }));
                 };
-
                 img.src = reader.result;
             };
-
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(file); //inicia a leitura do conteúdo do arquivo e, quando a leitura é concluída, permite manipular a URL de dados resultante e redimensionar a imagem/definir o preview
         }
     };
 
+    //Função responsável por atualizar a mudança de dados de qualquer input do formulário.
     const handleDataChange = (event) => {
         const { name, value } = event.target;
 
+        //Verifica se é um dado do cartão de crédito, pois precisa alterar a rota de armazenamento do objeto
         if (name.startsWith('cartaoCredito.')) {
             const cardField = name.split('.')[1];
             setUserData((prevData) => ({
@@ -118,43 +126,24 @@ const Cadastro = () => {
         }
     };
 
-
+    //Função responsável por enviar o userData para o endpoint que armazena o cliente no BD
     const handleFormSubmit = (event) => {
         event.preventDefault();
-
-
-        const formData = {
-            nomeCompleto: userData.nomeCompleto,
-            telefone: userData.telefone,
-            endereco: userData.endereco,
-            cpf: userData.cpf,
-            imagem: base64Image,
-            cartaoCredito: {
-                nome: userData.cartaoCredito.nome,
-                numero: userData.cartaoCredito.numero,
-                cvc: userData.cartaoCredito.cvc,
-            },
-            email: userData.email,
-            senha: userData.senha,
-        };
-
-
         api
-            .post('/cadastrarCliente', formData)
+            .post('/cadastrarCliente', userData)
             .then((response) => {
-                // Handle API response, if needed
                 alert("Cadastro efetuado!")
                 navigate('/')
             })
             .catch((error) => {
-                // Handle request errors, if any
                 console.error(error.response.data);
                 alert(" Ocorreu um erro! " + error.response.data.error)
             });
     };
 
+    // Retorno do componente Cadastro, contendo o formulário com os inputs necessários para cadastrar o usuário
     return (
-        <div>
+        <div className='bg-white'>
             <Titulo texto="Cadastro de Cliente" />
             <div className="flex flex-col items-center mx-auto shadow bg-white w-fit p-10 rounded-xl mb-10">
                 <form onSubmit={handleFormSubmit} className="flex flex-col items-center">

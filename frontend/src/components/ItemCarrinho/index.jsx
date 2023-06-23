@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
 import trash from '../../assets/trash.svg';
 
+//As funções são passadas por propriedade, pois são aplicadas em outro componente
 const ItemCarrinho = ({ item, onRemoveItem, onUpdateQuantity }) => {
+  //Declaração dos estados utilizados nesse componente 
   const [quantity, setQuantity] = useState(item.quantidade);
 
+  //Função responsável por atualizar a quantidade de itens no input do tipo number e chamar a função que altera os valores armazenados
   const handleQuantityChange = (event) => {
     const newQuantity = parseInt(event.target.value);
     setQuantity(newQuantity);
     onUpdateQuantity(item.id, newQuantity);
   };
 
+  //Função responsável por atualizar a página quando o input do tipo Number sair de foco
   const reloadPage = () => {
     window.location.reload()
   }
 
+  // Retorno do componente Item carrinho (Apresenta as informações dos produtos selecionados pelo usuário)
   return (
     <div className='w-80 py-2 px-5 my-3 bg-white rounded-xl shadow'>
       <div className='flex justify-between mb-2'>

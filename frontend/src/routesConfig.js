@@ -8,6 +8,7 @@ import Cadastro from './pages/Cadastro';
 
 export default function RoutesConfig() {
     return (
+        //Configuração das rotas a serem usadas pela aplicação
         <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/produto/:id' element={<Detalhes />} />

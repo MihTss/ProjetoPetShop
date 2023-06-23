@@ -47,6 +47,15 @@ input{
     filter: drop-shadow(4px -4px 8px #FFFFFF) drop-shadow(-4px 4px 8px #A9A9A8);   
 }
 
+.hover-profile{
+    filter: none;
+    transition: .2s
+}
+
+.hover-profile:hover{
+    filter: drop-shadow(2px -2px 4px #FFFFFF) drop-shadow(-2px 2px 4px #A9A9A8);   
+}
+
 .hover-select{
     background-color: white;
     border-radius: 0.5rem;
